@@ -1,15 +1,12 @@
 import React from "react";
 import {Routes, Route} from "react-router-dom";
 
-import Navs from "./Components/Navs";
 import Home from "./Routes/Home";
 import Starred from "./Routes/Starred";
 
 function App() {
   return (
     <div className="App">
-      <Navs />
-
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="starred" element={<Starred />}>
