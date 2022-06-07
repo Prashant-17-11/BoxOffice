@@ -5,18 +5,16 @@ const RadioWrapper = styled.label`
   display: block;
   position: relative;
   padding-left: 25px;
-  curosr: pointer;
+  cursor: pointer;
   font-size: 13px;
   user-select: none;
   font-weight: 700;
   line-height: 1.65;
-
   input {
     position: absolute;
-    opacitiy: 0;
+    opacity: 0;
     cursor: pointer;
   }
-
   span {
     position: absolute;
     top: 0;
@@ -27,22 +25,18 @@ const RadioWrapper = styled.label`
     border: 2px solid ${({ theme }) => theme.mainColors.blue};
     border-radius: 50%;
   }
-
   input:checked ~ span {
     background-color: #fff;
     border: 2px solid ${({ theme }) => theme.mainColors.blue};
   }
-
   span:after {
     content: "";
     position: absolute;
     display: none;
   }
-
   input:checked ~ span:after {
     display: block;
   }
-
   span:after {
     top: 4px;
     left: 4px;
