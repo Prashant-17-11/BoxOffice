@@ -1,17 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { apiGet } from "../Misc/Config";
+import ShowMainData from "../Components/show/ShowMainData";
+import Details from "../Components/show/Details";
+import Seasons from "../Components/show/Seasons";
+import Cast from "../Components/show/Cast";
+import { ShowPageWrapper, InfoBlock } from "./Show.styled";
+import { useShow, useShows } from "../Misc/CustomHooks";
 
 const Show = () => {
   const { id } = useParams();
-  const [show, setShow] = useState(null);
+  const { show, isLoading, error } = useShow(id);
 
-  useEffect(() => {
-    apiGet(`/shows/${id}?embed[]=seasons&embed=[]=cast`).then((results) => {
-      setShow(results);
-    });
-  }, [id]);
-  return <div>This is show page.</div>;
+  if (isLoading) {
+    return <div>Data is being loaded</div>;
+  }
+
+  if (error) {
+    return <div>Error occured: {error}</div>;
+  }
+
+  return (
+    <ShowPageWrapper>
+      <ShowMainData
+        image={show.image}
+        name={show.name}
+        rating={show.rating}
+        summary={show.summary}
+        tags={show.genres}
+      />
+
+      <InfoBlock>
+        <h2>Details</h2>
+        <Details
+          status={show.status}
+          network={show.network}
+          premiered={show.premiered}
+        />
+      </InfoBlock>
+
+      <InfoBlock>
+        <h2>Seasons</h2>
+        <Seasons seasons={show._embedded.seasons} />
+      </InfoBlock>
+
+      <InfoBlock>
+        <h2>Cast</h2>
+        <Cast cast={show._embedded.cast} />
+      </InfoBlock>
+    </ShowPageWrapper>
+  );
 };
 
 export default Show;
