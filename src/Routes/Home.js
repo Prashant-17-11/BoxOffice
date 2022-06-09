@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import MainPageLayout from "../Components/MainPageLayout";
 import ActorGrid from "../Components/actor/ActorGrid";
 import ShowGrid from "../Components/show/ShowGrid";
 
 import { apiGet } from "../Misc/Config";
-import { useLastQuery } from "../Misc/CustomHooks";
+import { useLastQuery, useWhyDidYouUpdate } from "../Misc/CustomHooks";
 import {
   SearchInput,
   RadioInputsWrapper,
@@ -25,9 +25,12 @@ const Home = () => {
     });
   };
 
-  const onInputChange = (e) => {
-    setInput(e.target.value);
-  };
+  const onInputChange = useCallback(
+    (e) => {
+      setInput(e.target.value);
+    },
+    [setInput]
+  );
 
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
@@ -36,11 +39,11 @@ const Home = () => {
   };
   // 13 is keyCode for ENTER key
 
-  const onRadioChange = (e) => {
+  const onRadioChange = useCallback((e) => {
     setSearchOptions(e.target.value);
-  };
+  }, []);
 
-  const renderResults = () => {
+  const renderResults = (results) => {
     if (results && results.length === 0) {
       return <div>No Results</div>;
     }
@@ -60,7 +63,9 @@ const Home = () => {
     <MainPageLayout>
       <SearchInput
         type="text"
-        placeholder="Search for something..."
+        placeholder={
+          isShowsSearch ? "Search for shows..." : "Search for people"
+        }
         onChange={onInputChange}
         onKeyDown={onKeyDown}
         value={input}
@@ -90,7 +95,7 @@ const Home = () => {
           Search
         </button>
       </SearchButtonWrapper>
-      {renderResults()}
+      {renderResults(results)}
     </MainPageLayout>
   );
 };

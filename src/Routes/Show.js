@@ -5,14 +5,14 @@ import Details from "../Components/show/Details";
 import Seasons from "../Components/show/Seasons";
 import Cast from "../Components/show/Cast";
 import { ShowPageWrapper, InfoBlock } from "./Show.styled";
-import { useShow, useShows } from "../Misc/CustomHooks";
+import { useShow } from "../Misc/CustomHooks";
 
 const Show = () => {
   const { id } = useParams();
   const { show, isLoading, error } = useShow(id);
 
   if (isLoading) {
-    return <div>Data is being loaded</div>;
+    return <div>Data is being loaded...</div>;
   }
 
   if (error) {

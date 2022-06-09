@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="starred" element={<Starred />}></Route>
         <Route path="/show/:id" element={<Show />}></Route>
-        <Route path="*" element={<>This is 404 page.</>}></Route>{" "}
+        <Route path="*" element={<>Error 404: Page not found</>}></Route>{" "}
         {/* '*' matches only no other routes match */}
       </Routes>
     </ThemeProvider>
