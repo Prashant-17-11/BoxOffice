@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SearchCard, SerachCard } from "../Styled";
+import { SearchCard} from "../Styled";
 
 export const StyledActorCard = styled(SearchCard)`
     .deathday {

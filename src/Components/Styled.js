@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FadeIn from "react-fade-in/lib/FadeIn";
+import FadeIn from 'react-fade-in/lib/FadeIn';
 
 export const FlexGrid = styled(FadeIn)`
   display: flex;
@@ -40,7 +40,7 @@ export const Star = styled.div`
   display: inline-block;
   width: 18px;
   height: 18px;
-  background-color: ${(props) => (props.active ? "#ffc806" : "#ddd")};
+  background-color: ${({ active }) => (active ? "#ffc806" : "#ddd")};
   clip-path: polygon(
     50% 0%,
     61% 35%,
